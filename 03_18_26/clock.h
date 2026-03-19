@@ -1,3 +1,5 @@
+#ifndef CLOCK_H
+#define CLOCK_H
 #include <string>
 #include <sstream>
 #include <iomanip>
@@ -26,3 +28,5 @@ private:
     int min;
     int sec;
 };
+
+#endif
