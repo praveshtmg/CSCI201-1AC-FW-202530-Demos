@@ -62,9 +62,12 @@ int Clock::getSecond() const
 
 std::string Clock::printTime() const
 {
-    std::string out;
-    out = out + std::to_string(hr) + ":" + std::to_string(min) + ":" + std::to_string(sec);
-    return out;
+    std::ostringstream out;
+    out << std::setfill('0');
+    out << std::setw(2) << hr << ":" << std::setw(2) << min << ":" << std::setw(2) << sec;
+    // std::string out;
+    // out = out + std::to_string(hr) + ":" + std::to_string(min) + ":" + std::to_string(sec);
+    return out.str();
 }
 
 void Clock::incrementSeconds()
@@ -94,6 +97,11 @@ void Clock::incrementHours()
     {
         hr = 0;
     }
+}
+
+bool Clock::equalTime(const Clock &otherClock) const
+{
+    return hr == otherClock.hr && min == otherClock.min && sec == otherClock.sec;
 }
 
 void Clock::clockTick()
