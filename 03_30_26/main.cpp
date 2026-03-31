@@ -4,6 +4,8 @@
 #include "clock.h"
 
 void resetStream();
+//lecture activity M03-A what code is needed to stop the memory leak caused by doubleArray on line 84
+//explain the difference between line 38 and line 65 and line 70
 
 int main()
 {
@@ -47,7 +49,7 @@ int main()
     clockPtr->clockTick();
     clockPtr->clockTick();
     std::cout << clockPtr->printTime() << std::endl;
-    Clock clocks[10];
+    // Clock clocks[10];
     std::cout << "How many clocks? ";
     std::cin >> m;
     while (!std::cin || m < 1)
@@ -59,9 +61,38 @@ int main()
         std::cout << "How many clocks? ";
         std::cin >> m;
     }
-    Clock *moreClocks = new Clock[m];
-    std::cout << moreClocks[m - 1].printTime() << std::endl;
-    moreClocks = new Clock;
+
+    Clock **moreClocks = new Clock *[m];
+    for (int i = 0; i < m; i++)
+    {
+        if (rand() % 2)
+        {
+            moreClocks[i] = new Clock(rand() % 12 + 1, rand() % 60, rand() % 60, Clock::TWENTYFOUR, rand() % 2 ? Clock::AM : Clock::PM); // if rand()%2 then am else pm
+        }
+        else
+        {
+            moreClocks[i] = new Clock(rand() % 24, rand() % 60, rand() % 60);
+        }
+    }
+    std::cout << (*moreClocks[m - 1]).printTime() << std::endl;
+    delete clockPtr;
+    clockPtr = nullptr;
+    // if(clockPtr == nullptr)
+    delete[] moreClocks;
+    moreClocks = nullptr;
+    // moreClocks = new Clock;
+    // delete moreClocks;
+    int **doubleArray;
+    doubleArray = new int *[3];
+    for (int i = 0; i < 3; i++)
+    {
+        doubleArray[i] = new int[5];
+        for (int j = 0; j < 5; j++)
+        {
+            doubleArray[i][j] = rand() % 100 + 1;
+        }
+    }
+    moreClocks = nullptr;
 
     return 0;
 }

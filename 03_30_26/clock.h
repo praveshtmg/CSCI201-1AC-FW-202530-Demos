@@ -17,7 +17,7 @@ public:
         AM,
         PM
     };
-    Clock(int = 0, int = 0, int = 0, ClockType = TWENTYFOUR, PartOfDayType = AM);
+    Clock(int, int, int, ClockType = TWENTYFOUR, PartOfDayType = AM);
     void setTime(int, int = 0, int = 0);
     void setHour(int);
     void setMinute(int);
