@@ -1,6 +1,9 @@
 #include <iostream>
 #include <string>
 #include <limits>
+#include <cstdlib>
+#include "pointers.h"
+#include "arrayListType.h"
 
 int getInt(std::string prompt, std::string error, bool (*valid)(int, int, int), int low = 0, int high = 0);
 bool isIntInRange(int num, int low, int high);
@@ -10,8 +13,22 @@ void resetStream();
 int main()
 {
     int guess = getInt("Enter a number between 1 and 100: ", "That is not a number between 1 and 100.", isIntInRange, 1, 100);
+    int copy(guess);
     std::cout << "You guessed " << guess << std::endl;
     guess = getInt("Enter a number greater than 0 ", "Invalid input", isIntGT0);
+    pointerClass p1(guess);
+    p1.addItem(43);
+    {
+        pointerClass p2(p1);
+        p2.addItem(22);
+    }
+    p1.addItem(236);
+    int size = getInt("Please enter the list size between 1 and 10: ", "That is not a valid number.", isIntInRange, 1, 10);
+    arrayListType myarray(size);
+    for (int i = 0; i < size; i++)
+    {
+        myarray.insert(rand() % 900 + 1);
+    }
 
     return 0;
 }
